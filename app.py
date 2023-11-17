@@ -18,8 +18,17 @@ def predict():
     stream = request.args.get('stream')
     internship = request.args.get('internship')
     cgpa = request.args.get('cgpa')
-    backlogs = request.args.get('backlogs')
-    arr = np.array([gender,stream,internship,cgpa,backlogs])
+    backlog = request.args.get('backlogs')
+    backlogs = request.args.get('backlogs') 
+    if backlog >= "2":
+        cgpa1 = "5"
+    else:
+        cgpa1 = cgpa    
+
+    if cgpa < "7":
+        internship = "0"
+          
+    arr = np.array([gender,stream,internship,cgpa1,backlogs])
     brr = np.asarray(arr, dtype=float)
     output = model.predict([brr])
     if(output==1):
